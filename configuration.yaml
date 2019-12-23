@@ -1,0 +1,52 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#base_url: ha.divox2.duckdns.org
+
+# Discover some devices automatically
+#discovery:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+####################################################
+#                                                  #
+#                    Components                    #
+#                                                  #
+####################################################
+
+mqtt:
+  broker: mqtt
+  port: 1883
+  client_id: home-assistant
+  username: mqtt_ha
+  password: !secret mqtt_password
+
+recorder:
+  db_url: mysql://hauser:hapass@mariadb/ha
+
+####################################################
+#                                                  #
+#                     Includes                     #
+#                                                  #
+####################################################
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+#alert: !include_dir_merge_named includes/alert
+#automation: !include_dir_merge_named includes/automation
+#automation: !include_dir_merge_list includes/automation
+#binary_sensor: !include_dir_merge_list includes/binary_sensors
+#camera: !include includes/cameras.yaml
+device_tracker: !include includes/device_trackers.yaml
+#group: !include_dir_merge_named includes/groups
+#panel_iframe: !include includes/panel_iframe.yaml
+#sensor: !include_dir_merge_list includes/sensors
+switch: !include_dir_merge_list includes/switches
+#weblink: !include includes/weblink.yaml
+zone: !include includes/zones.yaml

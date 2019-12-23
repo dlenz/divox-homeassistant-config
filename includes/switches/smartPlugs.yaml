@@ -1,0 +1,32 @@
+############################################################
+#
+# Home Assistant - Smart Plug switch configuration
+#
+############################################################
+
+- platform: mqtt
+  name: "Christmas Tree"
+  state_topic: "1545/stat/AWP04L_1/POWER"
+  command_topic: "1545/cmnd/AWP04L_1/POWER"
+  availability_topic: "1545/tele/AWP04L_1/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false
+  json_attributes_topic: "1545/tele/AWP04L_1/SENSOR"
+  json_attributes_template: "{{ value_json['ENERGY'] | tojson }}"
+- platform: mqtt
+  name: "Living Room Lamp"
+  state_topic: "1545/stat/AWP04L_2/POWER"
+  command_topic: "1545/cmnd/AWP04L_2/POWER"
+  availability_topic: "1545/tele/AWP04L_2/LWT"
+  qos: 1
+  payload_on: "ON"  
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false
+  json_attributes_topic: "1545/tele/AWP04L_2/SENSOR"
+  json_attributes_template: "{{ value_json['ENERGY'] | tojson }}"
